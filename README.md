@@ -27,7 +27,7 @@ chmod 777 /var/log/formas
 ```
 
 ## 项目组
-* cyber-auth-api
+* auth-api
 
 ## 目录结构
 ```
