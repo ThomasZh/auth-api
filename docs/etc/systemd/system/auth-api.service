@@ -1,0 +1,12 @@
+[Unit]
+Description=auth-api
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python3 /opt/formas/service/auth-api/auth_api.py >/dev/null 2>&1
+#User = root
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

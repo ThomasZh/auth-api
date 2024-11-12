@@ -1,0 +1,153 @@
+#!/usr/bin/env python
+# _*_ coding: utf-8_*_
+#
+# Copyright 2021 cyber-life.cn
+# thomas@cyber-life.cn
+
+
+import os
+import sys
+import logging
+import tornado.web
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../"))
+
+from base_handler import *
+from foo.dao.__table_name___dao import *
+
+
+# /api/__table_name__s
+class __class_name__sXHR(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def post(self):
+        try:
+            if isinstance(self.request.body, str):
+                payload = JSON.loads(self.request.body)
+            else:
+                payload = JSON.loads(self.request.body.decode("utf-8"))
+__payload__
+        except:
+            response = {"errCode":400, "errMsg":"Bad Request"}
+            self.write_response(response, logger=False)
+            return
+
+        operId = self.get_account_id()
+        operName = self.get_username()
+
+        uuid = generate_uuid_str()
+        __class_name__Dao().insert(uuid, __update_column_names__)
+
+        response = {"errCode": 200, "errMsg": "Success", "data": uuid}
+        self.write_response(response, logger=True)
+        return
+
+
+# /api/__table_name__s/filter
+class __class_name__sFilterXHR(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def post(self):
+        currPage = 1
+        pageSize = 20
+        orders = []
+        searchs = []
+
+        try:
+            if isinstance(self.request.body, str):
+                payload = JSON.loads(self.request.body)
+            else:
+                payload = JSON.loads(self.request.body.decode("utf-8"))
+            if "currPage" in payload:
+                currPage = int(payload["currPage"])
+            if "pageSize" in payload:
+                pageSize = int(payload["pageSize"])
+            if "orders" in payload:
+                orders = payload["orders"]
+            if "searchs" in payload:
+                searchs = payload["searchs"]
+        except:
+            response = {"errCode":400, "errMsg":"Bad Request"}
+            self.write_response(response, logger=False)
+            return
+
+        idx = (currPage - 1) * pageSize
+        datas = __class_name__Dao().selectPaginationByFilters(searchs, orders, idx, pageSize)
+
+        totalNum = __class_name__Dao().countPaginationByFilters(searchs)
+        if totalNum % pageSize == 0:
+            totalPage = int(totalNum / pageSize)
+        else:
+            totalPage = int(totalNum / pageSize) + 1
+
+        response = {
+            "errCode": 200,
+            "errMsg": "Success",
+            "currPage": currPage,
+            "pageSize": pageSize,
+            "totalNum": totalNum,
+            "totalPage": totalPage,
+            "datas": datas
+        }
+        self.write_response(response, logger=False)
+        return
+
+
+# /api/__table_name__s/{id}
+class __class_name__XHR(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def put(self, id):
+        try:
+            if isinstance(self.request.body, str):
+                payload = JSON.loads(self.request.body)
+            else:
+                payload = JSON.loads(self.request.body.decode("utf-8"))
+__payload__
+        except:
+            response = {"errCode":400, "errMsg":"Bad Request"}
+            self.write_response(response, logger=False)
+            return
+
+        __class_name__Dao().update(id, __update_column_names__)
+
+        response = {"errCode": 200, "errMsg": "Success"}
+        self.write_response(response, logger=True)
+        return
+
+
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def delete(self, id):
+        __class_name__Dao().delete(id)
+
+        response = {"errCode": 200, "errMsg": "Success"}
+        self.write_response(response, logger=True)
+        return
+
+
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self, id):
+        data = __class_name__Dao().select(id)
+
+        response = {"errCode": 200, "errMsg": "Success", "data":data}
+        self.write_response(response, logger=False)
+        return
+
+
+# /api/__table_name__s/{id}/status
+class __class_name__sStatusXHR(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def put(self, id):
+        try:
+            if isinstance(self.request.body, str):
+                payload = JSON.loads(self.request.body)
+            else:
+                payload = JSON.loads(self.request.body.decode("utf-8"))
+            status = payload["status"]
+        except:
+            response = {"errCode":400, "errMsg":"Bad Request"}
+            self.write_response(response, logger=False)
+            return
+
+        __class_name__Dao().updateStatus(id, status)
+
+        response = {"errCode": 200, "errMsg": "Success"}
+        self.write_response(response, logger=True)
+        return
