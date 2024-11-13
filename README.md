@@ -42,3 +42,8 @@ chmod 777 /var/log/formas
 ```
 /opt/formas/service/auth-api
 ```
+
+## 运行
+```
+python3 auth_api.py
+```
