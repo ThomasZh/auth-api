@@ -20,10 +20,10 @@ class GlobalConfig(Singleton):
     def load(self, cfg_file):
         config = configparser.ConfigParser()
         default_cfg_file = "/opt/formas/conf/auth-api.cfg"
-        if cfg_file:
-            default_cfg_file = cfg_file
-        ## 设置可选配置文件，最后优先级最高，文件不存在则忽略
-        config.read([cfg_file, default_cfg_file])
+        # if cfg_file:
+        #     default_cfg_file = cfg_file
+        ## TODO: 设置可选配置文件，最后优先级最高，文件不存在则忽略
+        config.read([default_cfg_file, cfg_file])
 
         # svc
         self.svc_id = config.get('svc', 'id')

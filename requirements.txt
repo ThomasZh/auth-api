@@ -7,7 +7,7 @@ PyMySQL==1.0.2
 dbutils==3.0.3
 redis==3.5.3
 pycparser==2.20
-requests==2.24.0
+requests==2.32.3
 configparser==5.0.2
 
 numpy==1.25.0

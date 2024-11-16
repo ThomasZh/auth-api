@@ -28,10 +28,11 @@ def sig_handler(sig, frame):
 
 
 def main():
-
+    # check config path from environment first:
+    config_from_env = os.environ['FORMAS_AUTH_CFG_PATH']
     # 加载配置信息
     cfg_file = "/opt/formas/conf/auth-api.cfg"
-    GlobalConfig().load(cfg_file)
+    GlobalConfig().load(config_from_env or cfg_file)
 
     # 设置日志格式
     init_logging(GlobalConfig().svc_name, GlobalConfig().svc_port)
@@ -62,7 +63,9 @@ def main():
 
     logging.info('|API service|Started|%s:%d', GlobalConfig().svc_host, GlobalConfig().svc_port)
 
-    app.listen(GlobalConfig().svc_port)
+    port_number = GlobalConfig().svc_port
+    print("=== FORMAS AUTH_API SERVER STARTED AT: ", port_number, " ===")
+    app.listen(port_number)
     tornado.ioloop.IOLoop.current().start()
 
 
