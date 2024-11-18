@@ -64,7 +64,9 @@ def main():
     logging.info('|API service|Started|%s:%d', GlobalConfig().svc_host, GlobalConfig().svc_port)
 
     port_number = GlobalConfig().svc_port
-    print("=== FORMAS AUTH_API SERVER STARTED AT: ", port_number, " ===")
+    host_ip = GlobalConfig().svc_host
+    full_address = str(host_ip) + ':' + str(port_number)
+    print("=== AUTH_API SERVER STARTED AT: ", full_address, " ===")
     app.listen(port_number)
     tornado.ioloop.IOLoop.current().start()
 
