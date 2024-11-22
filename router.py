@@ -172,12 +172,12 @@ def map():
         # 按照条件查询文件列表
         (r'/api/sys/files/([A-Za-z0-9]+)', getattr(sys_file, 'SysFileXHR')),
 
-        # 创建数据源
+        # 创建数据字典
         (r'/api/sys/dictionaries', getattr(sys_dictionary, 'SysDictionarysXHR')),
-        # 按照条件查询数据源列表
+        # 按照条件查询数据字典列表
         (r'/api/sys/dictionaries/filter', getattr(sys_dictionary, 'SysDictionarysFilterXHR')),
-        # 查询数据源
-        # 修改数据源
+        # 查询数据字典
+        # 修改数据字典
         (r'/api/sys/dictionaries/([A-Za-z0-9]+)', getattr(sys_dictionary, 'SysDictionaryXHR')),
 
         # comm
