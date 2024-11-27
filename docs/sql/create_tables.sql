@@ -9,6 +9,8 @@
 -- Table structure for table `auth_account`
 --
 
+USE formas;
+
 DROP TABLE IF EXISTS `auth_account`;
 CREATE TABLE `auth_account` (
   `id` char(32) NOT NULL,
