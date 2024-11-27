@@ -20,6 +20,7 @@ class SysDictionarysXHR(AuthorizationHandler):
             payload = CyJson.loads(self.request.body)
             category = payload['category']
             seq = payload['seq']
+            name = payload['name']
             value = payload['value']
         except:
             response = {"errCode":400, "errMsg":"Bad Request"}
@@ -27,7 +28,7 @@ class SysDictionarysXHR(AuthorizationHandler):
             return
 
         uuid = generate_uuid_str()
-        SysDictionaryDao().insert(uuid, category, seq, value)
+        SysDictionaryDao().insert(uuid, category, seq, name, value)
 
         response = {"errCode": 200, "errMsg": "Success", "data": uuid}
         self.write_response(response, logger=True)
@@ -88,13 +89,14 @@ class SysDictionaryXHR(AuthorizationHandler):
             payload = CyJson.loads(self.request.body)
             category = payload['category']
             seq = payload['seq']
+            name = payload['name']
             value = payload['value']
         except:
             response = {"errCode":400, "errMsg":"Bad Request"}
             self.write_response(response, logger=False)
             return
 
-        SysDictionaryDao().update(id, category, seq, value)
+        SysDictionaryDao().update(id, category, seq, name, value)
 
         response = {"errCode": 200, "errMsg": "Success"}
         self.write_response(response, logger=True)
