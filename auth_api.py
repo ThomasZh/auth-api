@@ -30,6 +30,10 @@ def sig_handler(sig, frame):
 def main():
     # check config path from environment first:
     config_from_env = os.environ['FORMAS_AUTH_CFG_PATH'] if 'FORMAS_AUTH_CFG_PATH' in os.environ else None
+    # confirm config file from environment:
+    if config_from_env is not None:
+        print("## loaded config file from environment:")
+        print(config_from_env)
     # 加载配置信息
     cfg_file = "/opt/formas/conf/auth-api.cfg"
     GlobalConfig().load(config_from_env or cfg_file)
