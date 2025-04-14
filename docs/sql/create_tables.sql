@@ -335,8 +335,8 @@ DROP TABLE IF EXISTS `sys_dictionary`;
 CREATE TABLE `sys_dictionary` (
   `id` varchar(32) NOT NULL,
   `category` varchar(255) DEFAULT NULL,
-  `seq` int(8) NOT NULL DEFAULT '0',
-  `name` varchar(255) DEFAULT NULL,
+  `sequence` int(8) NOT NULL DEFAULT '0',
+  `label` varchar(255) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

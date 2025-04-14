@@ -14,18 +14,18 @@ from foo.dao.mysql_util import *
 
 
 class SysDictionaryDao():
-    def insert(self, id, category, seq, name, value):
+    def insert(self, id, category, sequence, label, value):
         sql = """INSERT INTO sys_dictionary
-                 (id, category, seq, name, value)
+                 (id, category, sequence, label, value)
                  VALUES (%s, %s, %s, %s, %s)"""
-        params = (id, category, seq, name, value)
+        params = (id, category, sequence, label, value)
         logging.debug(sql, *params)
         rowNum = MysqlUtil().insert_one(sql, params)
         return rowNum
 
 
     def select(self,id):
-        sql = """SELECT id, category, seq, name, value
+        sql = """SELECT id, category, sequence, label, value
                  FROM sys_dictionary
                  WHERE id=%s"""
         params = (id,)
@@ -36,7 +36,7 @@ class SysDictionaryDao():
 
     def selectPagination(self, idx, limit):
         params = (idx, limit)
-        sql = """SELECT id, category, seq, name, value
+        sql = """SELECT id, category, sequence, label, value
                  FROM sys_dictionary
                  WHERE 1=1
                  LIMIT %s,%s"""
@@ -62,7 +62,7 @@ class SysDictionaryDao():
 
 
     def selectPaginationByFilters(self, searchs, orders, idx, limit):
-        sql = """SELECT id, category, seq, name, value
+        sql = """SELECT id, category, sequence, label, value
                  FROM sys_dictionary
                  WHERE 1=1 """
         params = ()
@@ -193,11 +193,11 @@ class SysDictionaryDao():
         return  rowNum
 
 
-    def update(self, id, category, seq, name, value):
+    def update(self, id, category, sequence, label, value):
         sql = """UPDATE sys_dictionary
-                 SET category=%s, seq=%s, name=%s, value=%s
+                 SET category=%s, sequence=%s, label=%s, value=%s
                  WHERE id=%s"""
-        params = (category, seq, name, value, id)
+        params = (category, sequence, label, value, id)
         logging.debug(sql, *params)
         rowNum = MysqlUtil().update(sql, params)
         return rowNum
