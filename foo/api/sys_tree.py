@@ -24,7 +24,7 @@ class SysTreesRootXHR(AuthorizationHandler):
     def post(self):
         try:
             payload = CyJson.loads(self.request.body)
-            rootid = payload['rootid']
+            # rootid = payload['rootid']
             title = payload['title']
             if "description" in payload:
                 description = payload['description']
@@ -35,7 +35,7 @@ class SysTreesRootXHR(AuthorizationHandler):
             self.write_response(response, logger=False)
             return
 
-        # uuid = generate_uuid_str()
+        rootid = generate_uuid_str()
         id = rootid
         pid = SYS_TREE_ROOT_PID
         lft = 1
